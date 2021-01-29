@@ -7,20 +7,25 @@ var base32output = document.querySelector('#base32vs');
 
 input.addEventListener('input', function()
 {
-    var rawInput = input.value;
-    var cleanedInput;
-    var convertedToBase = convertToBase(input.value,32);
-    var shortenedTimeStmp = shortenTimestamp(input.value);
+    processAllInputs();
+});
+// ################### END EVENT LISTENERS ####################
+function processAllInputs(){
+  var rawInput = input.value;
+    var cleanedInput = rawInput.match(/\d*/g).join(''); //extracts all numbers. Uses regex literal, providing compilation when the script is loaded.
+    var convertedToBase = convertToBase(cleanedInput,32);
+    var shortenedTimeStmp = shortenTimestamp(cleanedInput);
     //var timeStmpToPilotSpk = toPilotSpk(convertedToBase);
     base32output.textContent = convertedToBase;
     $('#truncatedOutput').html('<code>'+shortenedTimeStmp+'</code>');
-    $('#pilotSpeak1').html('<pre>'+ toPilotSpk(convertedToBase) + '</pre>');
-    $('#pilotSpeak2').html('<pre>'+ toPilotSpk(shortenedTimeStmp) + '</pre>');
+    $('#cleanedInputDat').html('<code>'+cleanedInput+'</code>');
+    $('#pilotSpeak1').html('<pre>'+ toPilotSpk(cleanedInput) + '</pre>');
+    $('#pilotSpeak2').html('<pre>'+ toPilotSpk(convertedToBase) + '</pre>');
+    $('#pilotSpeak3').html('<pre>'+ toPilotSpk(shortenedTimeStmp) + '</pre>');
     //$('#qrcode').empty(); $('#qrcode').qrcode($('#myInputBox').val());
     $('#qrcode').empty(); $('#qrcode').qrcode(convertedToBase);
-});
-// ################### END EVENT LISTENERS ####################
-
+    $('#qtFooter').html('<kbd>'+convertedToBase+'</kbd>');
+};
 
 function convertToBase(originalNumber,targetBaseSystem) {
   var convertedNumber = ""; //targetBaseSystem = 32;
@@ -202,7 +207,11 @@ function toPilotSpk(text) {
     }).join('\n');
 };
 
-
+function genDateTime(){
+  var now = new Date();
+  $('#myInputBox').val(now.toISOString()); // must use "val" instead of "text" since it's an input box.
+  processAllInputs();
+};
 
 
 /*

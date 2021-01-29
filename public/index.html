@@ -11,17 +11,27 @@
 
   <body>
     <div class="row container-fluid">
-      <div class="col-sm-4 shadow p-2 mb-2">
+       <button type="button" class="btn btn-warning" onclick="genDateTime()">Click to Generate Timestamp</button>
+    </div>
+    <div class="row container-fluid">
+      <div class="col-sm-5 shadow p-2 mb-2">
         <input type="text" class="form-control" id='myInputBox' placeholder='Enter the Value'></input>
       </div>
-      <div class="col-sm-4 shadow p-2 mb-2"><span id="base32vs"></span></div>
-      <div class="col-sm-4 shadow p-2 mb-2" id="truncatedOutput"></div>
+      <div class="col-sm-2 shadow p-2 mb-2"><span id="base32vs"></span></div>
+      <div class="col-sm-2 shadow p-2 mb-2" id="truncatedOutput"></div>
+      <div class="col-sm-3 shadow p-2 mb-2" id="cleanedInputDat"></div>
+
     </div>
 
     <div class = "row container-fluid">
-      <div class="col-sm-4 shadow p-2 mb-2" id="qrcode"></div>
-      <div class="col-sm-4 shadow p-2 mb-2" id="pilotSpeak1"></div>
-      <div class="col-sm-4 shadow p-2 mb-2" id="pilotSpeak2"></div>
+      <div class="col-sm-5 shadow p-2 mb-2 text-center" id="qrcodeBlock">
+<!--         <h5>QR Code<br><small>Base 32 Contents</small></h5> -->
+        <div id="qrcode" class="d-inline-flex"></div>
+        <h2 id="qtFooter"></h2>
+      </div>
+      <div class="col-sm-2 shadow p-2 mb-2" id="pilotSpeak2"></div>
+      <div class="col-sm-2 shadow p-2 mb-2" id="pilotSpeak3"></div>
+      <div class="col-sm-3 shadow p-2 mb-2" id="pilotSpeak1"></div>
     </div>
   </body>
 
