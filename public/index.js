@@ -7,7 +7,8 @@ var base32output = document.querySelector('#base32vs');
 
 input.addEventListener('input', function()
 {
-    //messages.textContent += 'input changed to: ' + input.value + '\n'; //original line
+    var rawInput = input.value;
+    var cleanedInput;
     var convertedToBase = convertToBase(input.value,32);
     var shortenedTimeStmp = shortenTimestamp(input.value);
     //var timeStmpToPilotSpk = toPilotSpk(convertedToBase);
@@ -15,7 +16,8 @@ input.addEventListener('input', function()
     $('#truncatedOutput').html('<code>'+shortenedTimeStmp+'</code>');
     $('#pilotSpeak1').html('<pre>'+ toPilotSpk(convertedToBase) + '</pre>');
     $('#pilotSpeak2').html('<pre>'+ toPilotSpk(shortenedTimeStmp) + '</pre>');
-
+    //$('#qrcode').empty(); $('#qrcode').qrcode($('#myInputBox').val());
+    $('#qrcode').empty(); $('#qrcode').qrcode(convertedToBase);
 });
 // ################### END EVENT LISTENERS ####################
 
@@ -25,7 +27,7 @@ function convertToBase(originalNumber,targetBaseSystem) {
   var extraNumeralTable = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var monthTable = "123456789OND";
   var dayTable = "123456789ABCDEFGHIJKLMNOPQRSTUV";
-  //extraNumeralTable = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V"];
+
   while (originalNumber > 0) {
     /* The javaScript "remainder" method fails due to the shorcomings
     / of floating point numbers. Therefore, a function needs to be created instead.*/
@@ -39,8 +41,9 @@ function convertToBase(originalNumber,targetBaseSystem) {
     console.log("rightDigit: " + rightDigit);
     console.log("originalNumber before flooring: " + longDivision(originalNumber,targetBaseSystem));
     //originalNumber = Math.floor(originalNumber / targetBaseSystem); //this is still introducing error.
-    originalNumber = BigInt((longDivision(originalNumber,targetBaseSystem)).match(/\d{1,}/g)[0]); /*extract the substring left of the decimal
-    See 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match'
+    originalNumber = BigInt((longDivision(originalNumber,targetBaseSystem)).match(/\d{1,}/g)[0]);
+    /*The line above extracts the substring left of the decimal using match() method with a regular expression
+      • See 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match'
     */
     console.log("originalNumber: " + BigInt(originalNumber)); // BigInt trims the leading zeroes, but isn't necessary for this to work
     //convertedNumber = String(rightDigit) + convertedNumber;
@@ -123,8 +126,8 @@ function shortenTimestamp(rawNmbr){
 };
 
 // Sourced from: "https://bocoup.com/blog/long-division-in-javascript" (this needs cleaned and modernized)
-function longDivision(n,d){
-    var num = n + "",
+function longDivision(myNumerator,myDenominator){
+    var num = myNumerator + "",
         numLength = num.length,
         remainder = 0,
         answer = '',
@@ -137,8 +140,8 @@ function longDivision(n,d){
             answer = answer + ".";
         }
 
-        answer = answer + Math.floor((digit + (remainder * 10))/d);
-        remainder = (digit + (remainder * 10))%d;
+        answer = answer + Math.floor((digit + (remainder * 10))/myDenominator);
+        remainder = (digit + (remainder * 10))%myDenominator;
         i++;
     }
     return answer;
@@ -208,3 +211,11 @@ function toPilotSpk(text) {
 ##############################################################################
 */
 //https://codepen.io/hchiam/pen/abvdPOe?editors=1010
+// var createQRCode = function(){
+//   var qrdata = $('#myInputBox').val();
+//   $('#qrcode').empty();
+//   $('#qrcode').qrcode(qrdata);
+// };
+
+// $('#myInputBox').keyup(createQRCode);
+// $('#myInputBox').change(createQRCode);
