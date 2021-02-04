@@ -92,6 +92,7 @@ function processAllInputs(){
 function convertToBase(originalNumber,targetBaseSystem) {
   var convertedNumber = ""; //targetBaseSystem = 32;
   var extraNumeralTable = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghikjlmnopqrstuvwxyz";
+  var chineseNumerals = '一二三四五六七八九十'; // These are the Chinese characters for 1 through 10 (the plus-looking thing is 10)
   var monthTable = "123456789OND"; //specialized base12 using 'O' for October, 'N' for November, 'D' for December.
   var dayTable = "123456789ABCDEFGHIJKLMNOPQRSTUV";
 
