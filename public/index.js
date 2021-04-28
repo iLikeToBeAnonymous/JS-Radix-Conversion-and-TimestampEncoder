@@ -106,11 +106,15 @@ function shortenTimestamp(rawNmbr){
        • If negative, this returns i elements from the end and discards the rest.*/
   //var milSec = rawNmbr.slice(rawNmbr.length-3); // returns the last 3 of the array
 
-  var milSec = rawNmbr.slice(-3); //There will never be more than 999 ms, and in base32, this can be represented with only two places. Pad to two if there's only 1.
+  //There will never be more than 999 ms, and in base32, this can be represented with only two places. Pad to two if there's only 1.
+  var milSec = rawNmbr.slice(-3); 
   milSec = milSec.padStart(3, '0'); // See "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart"
 
   var theScnds = rawNmbr.slice(-5,-3); // max seconds > 32 & < 100, so conversion doesn't save any space.
 
+  var allMilSec = rawNmbr.slice(-5); //var allMilSec = theScnds.concat(milSec);
+  var hndrthsSec = Math.round(`${allMilSec.slice(0,4)}.${allMilSec.slice(-1)}`); //basically divides "allMilSec" by 10 and 
+  console.log('Notice me, senpai! '+hndrthsSec);
   var theMinutes = rawNmbr.slice(-7,-5); // max minutes > 32 & < 100, so conversion doesn't save any space.
 
   var theHrs = rawNmbr.slice(-9,-7); //max hours < 32 & > 9, so conversion DOES save space. DO NOT PAD.
@@ -122,14 +126,16 @@ function shortenTimestamp(rawNmbr){
   // Year is long, so perhaps restrict to 3 digits and just assume the 1st digit will be a "2" for the life the the business?
   var theYear = rawNmbr.slice(-17,-13); //4 digits can be reduced to 3, so only pad 3
 
-  var allTogether = [convertToBase(theYear,36).padStart(3,'0'), convertToBase(theMonth,12).padStart(1,'0'),
-                      convertToBase(theDays,32).padStart(1,'0') + '-' + convertToBase(theHrs,36).padStart(1,'0'),
+  var allTogether = [convertToBase(theYear,36).padStart(3,'0'), 
+                      '-' + convertToBase(theMonth,12).padStart(1,'0'), 
+                      convertToBase(theDays,32).padStart(1,'0'),
+                      '—'+ convertToBase(theHrs,36).padStart(1,'0'),
                       theMinutes.padStart(2,'0'),
-                      convertToBase(theScnds + milSec,62).padStart(3,'0')]; // you gain nothing by representing seconds and ms separately. w' base 36, max ms can be cut to 4 digits.
+                      '-'+convertToBase(hndrthsSec,36).padStart(3,'0')]; // you gain nothing by representing seconds and ms separately. w' base 36, max ms can be cut to 4 digits.
 
   //var abbrvAsGroup = [theYear, theMinutes, theScnds, milSec];
   //var abbrvSeparately = [theMonth, theDays, theHrs]; // 59:59.999 = 3,599,999 ms 5LS9V vs 3DRJV
-  var shortenedTimestamp = [allTogether.join('.')]; //Puts them all together in the right order.
+  var shortenedTimestamp = [allTogether.join('')]; //Puts them all together in the right order.
 
 // This number throws an "NaN" in the shortenTimestamp function:  999931556925999
 
