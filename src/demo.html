@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Radix Conversion Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" />
+    <script src="mathing.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid" id="mainContainer">
+
+        <form>
+            <!-- BEGIN FIRST ROW -->
+            <div class="row shadow p-2 mb-2 justify-content-md-left">
+
+                <div class="col">
+                    <!-- https://www.w3schools.com/bootstrap5/bootstrap_form_floating_labels.php -->
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id='numeratorInput' placeholder='Enter the Numerator'
+                            value="33"></input>
+                        <label for="numeratorInput" class="form-label">numerator:</label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id='denominatorInput'
+                            placeholder='Enter the Denominator' value="32"></input>
+                        <label for="denominatorInput" class="form-label">denominator:</label>
+                    </div>
+                </div>
+
+                <button type="button" class="col-sm-3 btn btn-primary shadow p-2 mb-2" onclick="testDivisionRedo()">
+                    Test Division Function
+                </button>
+            </div>
+            <!-- END FIRST ROW -->
+
+            <!-- BEGIN SECOND ROW -->
+            <div class="row shadow p-2 mb-2 justify-content-md-center">
+
+                <div class="col">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id='quotientOutput' placeholder='quotient'></input>
+                        <label for="quotientOutput" class="form-label">quotient</label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id='remainderOutput' placeholder='remainder'></input>
+                        <label for="remainderOutput" class="form-label">remainder (modulus)</label>
+                    </div>
+                </div>
+
+            </div>
+            <!-- END SECOND ROW -->
+
+            <!-- BEGIN THIRD ROW -->
+            <div class="row shadow p-2 mb-2 justify-content-md-center">
+
+                <div class="col">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id='baseTen' placeholder='baseTen' value="33"></input>
+                        <label for="baseTen" class="form-label">Number to convert</label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id='targetRadix' placeholder='targetRadix'
+                            value="32"></input>
+                        <label for="targetRadix" class="form-label">target base system</label>
+                    </div>
+                </div>
+
+                <button type="button" class="col-sm-3 btn btn-primary shadow p-2 mb-2" onclick="testBaseConversion()">
+                    Test Base Conversion
+                </button>
+
+            </div>
+            <!-- END THIRD ROW -->
+
+            <!-- BEGIN FOURTH ROW -->
+            <div class="row shadow p-2 mb-2 justify-content-md-center">
+                Just another row...
+            </div>
+            <!-- END FOURTH ROW -->
+
+        </form>
+
+    </div> <!--END id="mainContainer"-->
+
+</body>
+
+</html>
