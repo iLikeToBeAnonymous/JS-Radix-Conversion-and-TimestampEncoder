@@ -20,7 +20,7 @@ const strToInt = (nmbrStr) => {
 
     nmbrStr = String(nmbrStr); //Make sure that the passed value is a string!
     // Set the init val for the integer data that will eventually be returned
-    let myInt = 0; 
+    let myInt = 0;
     // Convert back to an int via scientific notation
     for (let indx = 0; indx < nmbrStr.length; indx++) {
         // Pluck leftmost digit from overall number string
@@ -120,14 +120,14 @@ function convertToBase(originalNumber, targetBaseSystem) {
     // BEGIN ACTUAL BASE CONVERSION
     //Without this, passing a 0 value doesn't return anything.
     if (originalNumber == "0") { convertedNumber = "0"; } else {
-        while (strToInt(originalNumber) > 0) {
+        while (parseInt(originalNumber, 10) > 0) {
             // console.log(`originalNumber is of type: ${typeof originalNumber}`)
             // DO LONG DIVISION AND STORE THE RESULTING OBJECT FOR EACH LOOP
             divisionResults = divisionRedo(originalNumber, targetBaseSystem);
             returnedModulo = divisionResults[1];
             console.log(`${originalNumber}/${targetBaseSystem} = ${divisionResults[0]} with remainder of ${returnedModulo}`);
             if (returnedModulo > 9) {
-                rightDigit = extraNumeralTable[strToInt(returnedModulo)];
+                rightDigit = extraNumeralTable[parseInt(returnedModulo, 10)];
                 // rightDigit = extraNumeralTable[1*returnedModulo];
             } else {
                 rightDigit = returnedModulo.toString();
