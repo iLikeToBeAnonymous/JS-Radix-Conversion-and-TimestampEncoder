@@ -37,7 +37,7 @@ const strToInt = (nmbrStr) => {
     }
 
     return myInt;
-}; // END StrToInt
+}; // END strToInt
 
 function divisionRedo(numerator, denominator) {
 
@@ -74,7 +74,7 @@ function divisionRedo(numerator, denominator) {
         }
     });
     // console.log(quotient + ", " + remainderPart);
-    // returnValues[0] = StrToInt(quotient); //Just to get rid of the leading zeros...
+    // returnValues[0] = strToInt(quotient); //Just to get rid of the leading zeros...
     // returnValues[1] = String(remainderPart);
     let returnValues = [parseInt(quotient, 10), String(remainderPart)]
 
@@ -120,14 +120,14 @@ function convertToBase(originalNumber, targetBaseSystem) {
     // BEGIN ACTUAL BASE CONVERSION
     //Without this, passing a 0 value doesn't return anything.
     if (originalNumber == "0") { convertedNumber = "0"; } else {
-        while (StrToInt(originalNumber) > 0) {
+        while (strToInt(originalNumber) > 0) {
             // console.log(`originalNumber is of type: ${typeof originalNumber}`)
             // DO LONG DIVISION AND STORE THE RESULTING OBJECT FOR EACH LOOP
             divisionResults = divisionRedo(originalNumber, targetBaseSystem);
             returnedModulo = divisionResults[1];
             console.log(`${originalNumber}/${targetBaseSystem} = ${divisionResults[0]} with remainder of ${returnedModulo}`);
             if (returnedModulo > 9) {
-                rightDigit = extraNumeralTable[StrToInt(returnedModulo)];
+                rightDigit = extraNumeralTable[strToInt(returnedModulo)];
                 // rightDigit = extraNumeralTable[1*returnedModulo];
             } else {
                 rightDigit = returnedModulo.toString();
